@@ -3,7 +3,7 @@
 // 1) Importing dependencies:
 require('dotenv').config(); // This must be first. It reads the '.env' file and loads the API key into 'process.env' so the rest of the app can access it.
 const express = require('express');  //Imports the 'express' library/framework and stores it in 'express' variable
-//
+const movieRoutes = require('./routes/movieRoutes');
 
 
 // 2) Creating an 'Express' application instance:
