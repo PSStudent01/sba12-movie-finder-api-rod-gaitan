@@ -38,13 +38,21 @@ const { id } = req.params; // Grabs the ':id' to fetch the exact movie id from t
     //return res.status(400).json({ error: 'title id parameter is required' });
     //}
 
+  try { // this says "hey try the following, but if anything goes wrong, don't crash, jump to 'catch' block instead."
+        const response = await axios.get('http://www.omdbapi.com/', { // 1) 'axios' makes a GET request to the OMDb API 2) waits for the response before moving on 3) The result gets stored in 'response'.
+            params: {  // This info gets added to the URL automatically as query parameters
+                i: id,  // Same idea as above in 1st route but OMDb uses 'i' (not 's') when you're looking up a specific movie by its IMDb ID.
+                        // note: The 'i' is not a variable name we chose bc it's what the OMDb API expects. It's part of their API specification.
+                apikey: process.env.OMDB_API_KEY //  represents my API key
+            }
+        });
+        res.json(response.data); //sends the data OMDb provided to us back to whoever called the API, formatted as JSON.
+    } catch (error) {  // If anything inside the try block fails like network issue, bad API key, etc. 
+        res.status(500).json({ error: 'Failed to fetch movie details' }); // THEN this catches it and sends back a 500 error instead of crashing the whole server.
+    }
+};
 
-
-
-
-
-
-}
+module.exports = { searchMovies, getMovieDetails };  //Makes both functions available to other files. This is what allows movieRoutes.js to import them with the require statement in there.
 
 
 /*

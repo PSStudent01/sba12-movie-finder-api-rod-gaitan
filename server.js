@@ -1,3 +1,4 @@
+//  Building a fully functional RESTful API from scratch
 // server file
 // Building the 'server.js'
 // 1) Importing dependencies:
@@ -20,17 +21,10 @@ app.use('/api', movieRoutes); // This is the route mounting
                               // this says "hey, whenever a request comes in that starts with /api, send it to 'movieRoutes' to handle."
 
 // 4) Creating/starting server:
-const PORT = 7777;
+const PORT = 3001;
 app.listen(PORT, () => {  //starts the server on port 7777...
     console.log(`Server is running on http://localhost:${PORT}`); //and logs a message so you know it's running
 });
-
-
-
-
-
-
-
 
 
 
